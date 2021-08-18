@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :users do
-        post 'login', on: :collection
+      resource :user do
+        post 'login'
+        get 'profile'
+        delete 'sign_out'
       end
     end
   end
