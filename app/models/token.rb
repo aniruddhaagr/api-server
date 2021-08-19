@@ -3,6 +3,7 @@ class Token < ApplicationRecord
   before_validation :generate_auth_token
 
   private
+
   def generate_auth_token
     loop do
       self.auth_token = SecureRandom.hex(10)
