@@ -9,15 +9,15 @@ class Api::V1::UsersController < ApplicationController
     if user.save
       render json: { message: 'success' }, status: :ok
     else
-      render json: user.errors, status: 422
+      render json: { message: user.errors.full_messages }, status: 422
     end
   end
 
   # Sign-in user with password and send back latest generated auth token
   def login
     user = User.find_by(email: params[:email])
-    return render json: { message: 'Email does not exist' }, status: 422 unless user
-    return render json: { message: 'Password not valid' }, status: 422 unless user.valid_password?(params[:password])
+    return render json: { message: ['Email does not exist'] }, status: 422 unless user
+    return render json: { message: ['Password not valid'] }, status: 422 unless user.valid_password?(params[:password])
 
     token = user.tokens.create
     render json: { auth_token: token.auth_token }, status: :ok
@@ -33,7 +33,7 @@ class Api::V1::UsersController < ApplicationController
     if @current_user.update(user_params)
       render json: { message: 'success' }, status: :ok
     else
-      render json: user.errors, status: 422
+      render json: { message: @current_user.errors.full_messages }, status: 422
     end
   end
 

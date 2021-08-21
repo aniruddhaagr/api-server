@@ -18,7 +18,7 @@ RSpec.describe Api::V1::UsersController, :type => :controller  do
     let(:user) {
       User.create(first_name: "Mike", last_name: "Pike", email: "dev-mike-pike@gmail.com", password: "Password$123")
     }
-    
+
     it 'logs user in' do
       post :login, params: { email: user.email, password: user.password }
       expect(response).to have_http_status(200)
@@ -27,13 +27,13 @@ RSpec.describe Api::V1::UsersController, :type => :controller  do
     it 'does not log user with wrong email' do
       post :login, params: { email: "dev-test@gmail.com" }
       expect(response).to have_http_status(422)
-      expect(JSON.parse(response.body)["message"]).to eq('Email does not exist')
+      expect(JSON.parse(response.body)["message"][0]).to eq('Email does not exist')
     end
 
     it 'does not log user with wrong password' do
       post :login, params: { password: "test" }
       expect(response).to have_http_status(422)
-      expect(JSON.parse(response.body)["message"]).to eq('Email does not exist')
+      expect(JSON.parse(response.body)["message"][0]).to eq('Email does not exist')
     end
   end
 
