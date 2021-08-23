@@ -9,23 +9,21 @@ Things you may want to cover:
 
 * System dependencies - psql
 
-* Configuration - 
-    gem install bundler
-    bundle install
+* Configuration -
+
+    `gem install bundler`
+
+    `bundle install`
 
 * Database creation
-  rake db:create
+  `rake db:create`
 
 * Database initialization
-  rake db:schema:load
-  rake db:migrate
+  `rake db:schema:load`
+  `rake db:migrate`
 
 * How to run the test suite
-  rake test
+  `rspec`
 
 * Start rails server
-  rails s
-
-* Deployment instructions
-
-* ...
+  `rails s`
